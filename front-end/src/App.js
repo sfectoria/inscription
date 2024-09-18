@@ -1,47 +1,74 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Inscription from "./pages/Inscription";
 import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
 import logo from "./assets/images/logo.jpg";
-import logoTun from "./assets/images/logoTun.png";
+import post from "./assets/images/post.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 function App() {
+  const datacount="2024/09/21"
+  const [day, setDay] = useState("--");
+  const [hour, setHour] = useState("--");
+  const [minute, setMinute] = useState("--");
+  const [second, setSecond] = useState("--");
+
+  useEffect(() => {
+    const interval = setInterval(countDownDate, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const countDownDate = function () {
+    let timeleft = new Date(datacount).getTime() - new Date().getTime();
+
+    setDay(Math.floor(timeleft / (1000 * 60 * 60 * 24)));
+    setHour(Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+    setMinute(Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60)));
+    setSecond(Math.floor((timeleft % (1000 * 60)) / 1000));
+  };
   return (
-    <div className=" " style={{ direction: "rtl" }}>
-      
-    <BrowserRouter>
-    <div className="d-flex  justify-content-center p-2 ">
-        <div className="align-items-start d-flex ">
-          <img
-            src={logoTun}
-            alt="logoTun"
-            style={{ objectFit: "contain" }}
-            className=" w-100"
-          />
+    <div className="container-md" style={{ direction: "rtl" }}>
+      <BrowserRouter>
+        <div className="d-md-flex  justify-content-center p-2 align-items-center">
+          <div className=" align-items-start d-flex col-12 col-md-6">
+            <img
+              src={post}
+              alt="logoTun"
+              style={{ objectFit: "contain",maxWidth:"500px" }}
+              className=" w-100"
+            />
+          </div>
+          <div
+            className=" d-flex justify-content-center col-12 col-md-6 flex-wrap gap-2 text-danger"
+            // data-count="2023/12/5"
+            // style={{direction:"ltr"}}
+
+          >
+            <div className="d-flex">
+              <h3>{day}</h3>
+              <h4>يوم</h4>
+            </div>
+            <div className="d-flex">
+              <h3>{hour}</h3>
+              <h4>ساعات</h4>
+            </div>
+            <div className="d-flex">
+              <h3>{minute}</h3>
+              <h4>دقائق</h4>
+            </div>
+            <div className="d-flex">
+              <h3>{second}</h3>
+              <h4>ثواني</h4>
+            </div>
+          </div>
         </div>
-        <div className=" col-10 d-flex align-items-center justify-content-center">
-          <h1 className="text-center" style={{ direction: "ltr" }}>
-            <span> Union Générale Tunisienne des Etudiants (UGTE)</span>{" "}
-            -الإتحاد العام التونسي للطلبة
-          </h1>
-        </div>
-        <div className="align-items-start d-flex ">
-          <img
-            src={logo}
-            alt="logo"
-            style={{ objectFit: "contain" }}
-            className="w-100"
-          />
-        </div>
-      </div>
-      <Routes>
-        <Route index element={<Inscription />} />
-        <Route path="member/:memberId" element={<Profile/>} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+        <Routes>
+          <Route index element={<Inscription />} />
+          <Route path="member/:memberId" element={<Profile />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }
