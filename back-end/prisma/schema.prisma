@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount", "orderByRelation"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String @id @default(uuid())
+  name      String
+  email     String @unique
+  avatarUrl String?
+  password  String
+  confirmkey String?
+}
+
+model Member {
+  cin              String         @id
+  firstNameAr      String
+  firstNameFr      String
+  lastNameAr       String
+  lastNameFr       String
+  gender           Gender
+  dob              DateTime
+  email            String
+  address          String
+  phone            String
+  Government       Government     @relation(fields: [governmentId], references: [id])
+  governmentId     Int
+  Grade            Grade          @relation(fields: [gradeId], references: [id])
+  gradeId          Int
+  University       University     @relation(fields: [universityId], references: [id])
+  universityId     Int
+  UniversityPart   UniversityPart @relation(fields: [universityPartId], references: [id])
+  universityPartId Int
+  EducationLevel   EducationLevel @relation(fields: [educationLevelId], references: [id])
+  educationLevelId Int
+  speciality       String
+  avatarUrl        String?
+  studentCardUrl   String?
+}
+
+model Government {
+  id     Int      @id @default(autoincrement())
+  nameFr String
+  Member Member[]
+}
+
+model Grade {
+  id     Int      @id @default(autoincrement())
+  nameAr String
+  Member Member[]
+}
+
+model University {
+  id             Int              @id @default(autoincrement())
+  nameAr         String
+  Member         Member[]
+  UniversityPart UniversityPart[]
+}
+
+model UniversityPart {
+  id           Int        @id @default(autoincrement())
+  nameAr       String
+  Member       Member[]
+  University   University @relation(fields: [universityId], references: [id])
+  universityId Int
+}
+
+model EducationLevel {
+  id     Int      @id @default(autoincrement())
+  nameAr String
+  Member Member[]
+}
+
+enum Gender {
+  male
+  female
+}

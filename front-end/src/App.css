@@ -1,0 +1,13 @@
+
+.custom-border {
+  border: 3px solid #f8ab0f;
+}
+
+@import url("./assets/style/colors.css");
+@import url("./assets/style/mediaQuery.css");
+
+
+.back {
+  background-color: rgba(128, 128, 128, 0.496);
+}
+
