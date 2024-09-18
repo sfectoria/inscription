@@ -21,29 +21,16 @@ model User {
 }
 
 model Member {
-  cin              String         @id
+  cin              Int         @id @default(autoincrement())
   firstNameAr      String
-  firstNameFr      String
   lastNameAr       String
-  lastNameFr       String
   gender           Gender
   dob              DateTime
   email            String
-  address          String
   phone            String
   Government       Government     @relation(fields: [governmentId], references: [id])
   governmentId     Int
-  Grade            Grade          @relation(fields: [gradeId], references: [id])
-  gradeId          Int
-  University       University     @relation(fields: [universityId], references: [id])
-  universityId     Int
-  UniversityPart   UniversityPart @relation(fields: [universityPartId], references: [id])
-  universityPartId Int
-  EducationLevel   EducationLevel @relation(fields: [educationLevelId], references: [id])
-  educationLevelId Int
-  speciality       String
-  avatarUrl        String?
-  studentCardUrl   String?
+
 }
 
 model Government {
@@ -52,32 +39,7 @@ model Government {
   Member Member[]
 }
 
-model Grade {
-  id     Int      @id @default(autoincrement())
-  nameAr String
-  Member Member[]
-}
 
-model University {
-  id             Int              @id @default(autoincrement())
-  nameAr         String
-  Member         Member[]
-  UniversityPart UniversityPart[]
-}
-
-model UniversityPart {
-  id           Int        @id @default(autoincrement())
-  nameAr       String
-  Member       Member[]
-  University   University @relation(fields: [universityId], references: [id])
-  universityId Int
-}
-
-model EducationLevel {
-  id     Int      @id @default(autoincrement())
-  nameAr String
-  Member Member[]
-}
 
 enum Gender {
   male

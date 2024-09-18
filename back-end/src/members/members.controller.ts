@@ -33,7 +33,7 @@ export class MembersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.memebersService.findOne(id);
+    return this.memebersService.findOne(+id);
   }
 
   @Patch(':id')

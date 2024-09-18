@@ -8,7 +8,7 @@ import post from "./assets/images/post.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 function App() {
-  const datacount="2024/09/21"
+  const datacount="2024-09-21T15:00:00"
   const [day, setDay] = useState("--");
   const [hour, setHour] = useState("--");
   const [minute, setMinute] = useState("--");
@@ -28,10 +28,11 @@ function App() {
     setSecond(Math.floor((timeleft % (1000 * 60)) / 1000));
   };
   return (
-    <div className="container-md" style={{ direction: "rtl" }}>
+    <div className="" style={{ direction: "rtl" ,background:"#FCF7FD"}}>
       <BrowserRouter>
-        <div className="d-md-flex  justify-content-center p-2 align-items-center">
-          <div className=" align-items-start d-flex col-12 col-md-6">
+        <div className=" container-md    p-2 ">
+          
+          <div className="  d-flex col-12  justify-content-center ">
             <img
               src={post}
               alt="logoTun"
@@ -40,7 +41,7 @@ function App() {
             />
           </div>
           <div
-            className=" d-flex justify-content-center col-12 col-md-6 flex-wrap gap-2 text-danger"
+            className=" d-flex justify-content-center col-12  flex-wrap gap-2 text-danger py-3"
             // data-count="2023/12/5"
             // style={{direction:"ltr"}}
 

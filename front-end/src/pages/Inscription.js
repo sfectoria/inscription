@@ -99,11 +99,11 @@ function Inscription() {
     <>
       <Container>
         <Card className="shadow ">
-         
+          
           <Card.Body>
             <div className="mb-3 mt-4">
               <h2 className="fw-bold mb-5 text-center">
-                الإستمارة الوطنية للإنخراط
+              إستمارة الإنخراط
               </h2>
 
               <Form
