@@ -25,23 +25,17 @@ export class MembersService {
     return await this.prisma.member.findMany({
       where: aux,
       include: {
-        University: true,
-        UniversityPart: true,
-        EducationLevel: true,
-        Grade: true,
+      
         Government: true,
       },
     });
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     return await this.prisma.member.findUniqueOrThrow({
       where: { cin: id },
       include: {
-        University: true,
-        UniversityPart: true,
-        EducationLevel: true,
-        Grade: true,
+     
         Government: true,
       },
     });
