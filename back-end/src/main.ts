@@ -9,14 +9,21 @@ import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.enableCors({optionsSuccessStatus:200,credentials:true, });
-  app.useStaticAssets(join(__dirname, '../../../front-end', 'build'))
+  app.enableCors({
+    optionsSuccessStatus: 200,
+    credentials: true,
+    origin: ['http://localhost:3100', 'http://161.97.170.250:3100'],
+  });
+  app.useStaticAssets(join(__dirname, '../../../front-end', 'build'));
   app.setGlobalPrefix('/api/v1');
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('UGTE')
     .setDescription('The UGTE API description')
-    .addApiKey({ type: 'apiKey', name: 'Authorization', in: 'header' },'apiKey')
+    .addApiKey(
+      { type: 'apiKey', name: 'Authorization', in: 'header' },
+      'apiKey',
+    )
     .setVersion('0.1')
     .build();
 
